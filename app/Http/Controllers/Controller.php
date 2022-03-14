@@ -46,7 +46,7 @@ class Controller extends BaseController
         if(env("APP_DEBUG")) {
             $this->response->addData("file", $e->getFile())
                            ->addData("line", $e->getLine())
-                           ->addData("trace", $e->getTrace());
+                           ->addData("trace", $e->getTraceAsString());
         }
 
         return $this->jsonResponse();

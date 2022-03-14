@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+//use GuzzleHttp\Client;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
@@ -42,18 +43,15 @@ class VendasController extends Controller
         try {
             $query = ["nu_documento" => $documento];
 
-            $client = new Client(['base_uri' => env("FPAY")]);
-
-            $res    = $client->request("GET", "/clientes", [
-                "Content-Type" => "application/json",
-                "Client-Code"  => env("CLIENT_CODE"),
-                "Client-key"   => env("CLIENT_KEY"),
-                "query"        => $query
+            $client = new Client(['base_uri' => env("FPAY"), "query" => $query]);
+            $res = $client->get("/clientes", [
+                "headers" => [
+                    "Content-Type" => "application/json",
+                    "Client-Code"  => env("CLIENT_CODE"),
+                    "Client-key"   => env("CLIENT_KEY"),
+                ]
             ]);
 
-            if( $res->getStatusCode() != 200 ) {
-                throw new Exception("Ocorreu um erro inesperado", $res->getStatusCode());
-            }
             $cliente = json_decode($res->getBody()->getContents());
 
             return $this->json($cliente);
