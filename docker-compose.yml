@@ -1,0 +1,20 @@
+version: "3.8"
+
+networks:
+  peopleplan-net:
+
+volumes:
+  peopleplan-volume:
+
+services:
+  peopleplan-api:
+    image: "php:8.0-apache"
+    container_name: "peopleplan_api"
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
+    entrypoint: bash -c "cd /var/www/html && php -S 0.0.0.0:8000 -t public/"
+    ports:
+      - "8000:8000"
+    networks:
+      - "peopleplan-net"
