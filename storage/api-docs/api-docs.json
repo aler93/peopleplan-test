@@ -1,0 +1,107 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PeoplePlan API",
+        "contact": {
+            "name": "Alisson Naimayer",
+            "email": "anaimayer3@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/vendas": {
+            "get": {
+                "tags": [
+                    "Consulta"
+                ],
+                "operationId": "/sample/category/things",
+                "responses": {
+                    "200": {
+                        "description": "Lista de vendas",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error: Erro interno no servidor."
+                    }
+                }
+            }
+        },
+        "/api/cliente": {
+            "get": {
+                "tags": [
+                    "Consulta"
+                ],
+                "operationId": "/sample/category/things",
+                "parameters": [
+                    {
+                        "name": "documento",
+                        "in": "path",
+                        "description": "Número do documento do cliente para efetuar busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados do cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error: Erro interno no servidor."
+                    }
+                }
+            }
+        },
+        "/api/parcelas": {
+            "get": {
+                "tags": [
+                    "Consulta"
+                ],
+                "operationId": "/sample/category/things",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Número do code para efetuar busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Número da key para efetuar busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados do cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error: Erro interno no servidor."
+                    }
+                }
+            }
+        }
+    }
+}

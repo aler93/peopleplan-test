@@ -11,6 +11,16 @@ use Throwable;
 
 class Controller extends BaseController
 {
+    /**
+     * @OA\Info(
+     *   title="PeoplePlan API",
+     *   version="1.0",
+     *   @OA\Contact(
+     *     email="anaimayer3@gmail.com",
+     *     name="Alisson Naimayer"
+     *   )
+     * )
+     */
     public function __construct(Request $request)
     {
         $this->response = new Response();
@@ -43,7 +53,7 @@ class Controller extends BaseController
             ->icon("error")
             ->status($status);
 
-        if(env("APP_DEBUG")) {
+        if( env("APP_DEBUG") ) {
             $this->response->addData("file", $e->getFile())
                            ->addData("line", $e->getLine())
                            ->addData("trace", $e->getTraceAsString());
