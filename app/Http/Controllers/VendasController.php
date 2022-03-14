@@ -32,8 +32,6 @@ class VendasController extends Controller
         }
     }
 
-    // TODO
-
     /**
      * @param string $documento
      * @return JsonResponse
@@ -51,6 +49,10 @@ class VendasController extends Controller
                     "Client-key"   => env("CLIENT_KEY"),
                 ]
             ]);
+
+            if( $res->getStatusCode() != 200 ) {
+                throw new Exception("Ocorreu um erro inesperado", $res->getStatusCode());
+            }
 
             $cliente = json_decode($res->getBody()->getContents());
 
@@ -70,14 +72,17 @@ class VendasController extends Controller
         try {
             $client = new Client(['base_uri' => env("FPAY")]);
             $res    = $client->request("GET", "/parcelas", [
-                "Content-Type" => "application/json",
-                "Client-Code"  => $code,
-                "Client-key"   => $key
+                "headers" => [
+                    "Content-Type" => "application/json",
+                    "Client-Code"  => $code,
+                    "Client-key"   => $key
+                ]
             ]);
 
             if( $res->getStatusCode() != 200 ) {
                 throw new Exception("Ocorreu um erro inesperado", $res->getStatusCode());
             }
+
             $parcelas = json_decode($res->getBody()->getContents());
 
             return $this->json($parcelas);
